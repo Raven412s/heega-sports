@@ -1,10 +1,76 @@
+import React, { useEffect, useRef, useState } from "react";
+import { FcNext } from "react-icons/fc";
 import "./App.css";
-import { useEffect, useRef } from "react";
+import Modal from "./Modal";
 
 function App() {
   const lens_ref = useRef();
   const product_img_ref = useRef();
   const magnified_img_ref = useRef();
+  const [startIndex, setStartIndex] = useState(0);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const openModal = (index) => {
+    setCurrentIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const nextImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % arrImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + arrImages.length) % arrImages.length);
+  };
+  const arrImages = [
+    {
+      alt: "img",
+      src: "./images/img1-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img1.webp",
+    },
+    {
+      alt: "img",
+      src: "./images/img2-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img2.webp",
+    },
+    {
+      alt: "img",
+      src: "./images/img3-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img3.webp",
+    },
+    {
+      alt: "img",
+      src: "./images/img4-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img4.webp",
+    },
+    {
+      alt: "img",
+      src: "./images/img5-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img5.webp",
+    },
+    {
+      alt: "img",
+      src: "./images/img1-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img1.webp",
+    },
+    {
+      alt: "img",
+      src: "./images/img1-min.webp",
+      className: "xzoom-gallery",
+      href: "./images/img1.webp",
+    },
+  ];
 
   useEffect(() => {
     const lens = lens_ref.current;
@@ -25,7 +91,7 @@ function App() {
       if (y > max_ypos) y = max_ypos;
       if (y < 0) y = 0;
 
-      lens.style.cssText = `top: ${y}px; left:${x}px`;
+      lens.style.cssText = `top: ${y}px; left:${x}px;`;
 
       cx = magnified_img.offsetWidth / lens.offsetWidth;
       cy = magnified_img.offsetHeight / lens.offsetHeight;
@@ -57,12 +123,14 @@ function App() {
       thumbnail.addEventListener("mouseover", (e) => {
         e.preventDefault();
         const newSrc = thumbnail.getAttribute("href");
-        const newPreview = thumbnail
-          .querySelector("img")
-          .getAttribute("xpreview");
+        const newPreview = thumbnail.querySelector("img").getAttribute("src");
         product_img.setAttribute("src", newSrc);
         product_img.setAttribute("xoriginal", newPreview);
-        
+
+        thumbnails.forEach((thumbs) => thumbs.classList.remove("selectedTrue"));
+
+        thumbnail.classList.add("selectedTrue");
+
         const product_img_rect = product_img.getBoundingClientRect();
         const cx = magnified_img.offsetWidth / lens.offsetWidth;
         const cy = magnified_img.offsetHeight / lens.offsetHeight;
@@ -77,63 +145,65 @@ function App() {
       product_img.removeEventListener("mousemove", moveLens);
       product_img.removeEventListener("mouseout", leaveLens);
     };
-  }, [lens_ref, product_img_ref, magnified_img_ref]);
+  }, []);
+
+  const handleNext = () => {
+    if (startIndex + 5 < arrImages.length) {
+      setStartIndex((prevIndex) => prevIndex + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    setStartIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
+  };
+
+  const displayedImages = arrImages.slice(startIndex, startIndex + 5);
 
   return (
     <div className="container">
       <div className="xzoom-thumbs">
-        <a href="./images/img1.webp">
-          <img
-            alt="img"
-            src="./images/img1-min.webp"
-            className="xzoom-gallery"
-            xpreview="./images/img1-min.webp"
-          />
-        </a>
-        <a href="./images/img2.webp">
-          <img
-            alt="img"
-            src="./images/img2-min.webp"
-            className="xzoom-gallery"
-          />
-        </a>
-        <a href="./images/img3.webp">
-          <img
-            alt="img"
-            src="./images/img3-min.webp"
-            className="xzoom-gallery"
-          />
-        </a>
-        <a href="./images/img4.webp">
-          <img
-            alt="img"
-            src="./images/img4-min.webp"
-            className="xzoom-gallery"
-          />
-        </a>
-        <a href="./images/img5.webp">
-          <img
-            alt="img"
-            src="./images/img5-min.webp"
-            className="xzoom-gallery"
-          />
-        </a>
-    
+        <FcNext
+          onClick={handlePrev}
+          className="prev-button"
+          disabled={startIndex === 0}
+        />
+
+        {displayedImages.map((image, index) => (
+          <a href={image.href} key={index}>
+            <img src={image.src} alt={image.alt} className={image.className} />
+          </a>
+        ))}
+        <FcNext
+          onClick={handleNext}
+          className="nxt-button"
+          disabled={startIndex + 5 >= arrImages.length}
+        />
       </div>
       <div className="xzoom-container">
-        <img
-          alt="img"
-          ref={product_img_ref}
-          src="./images/img1.webp"
-          className="xzoom"
-          xoriginal="./images/img1-min.webp"
-        />
+        <a href="#!" className="mainImage" onClick={() => openModal(0)}>
+          <img
+            alt="img"
+            ref={product_img_ref}
+            src="./images/img1.webp"
+            className="xzoom"
+            xoriginal="./images/img1-min.webp"
+          />
+        </a>
         <div className="lens" ref={lens_ref} />
       </div>
       <div className="description">
-      <h1>React image magnifier x slider</h1>
-        <div className="magnified-img" alt="img" ref={magnified_img_ref} />
+        <h1>React image magnifier x slider</h1>
+        <div className="magnified-img" ref={magnified_img_ref} />
       </div>
+      {isModalOpen && (
+        <Modal
+          images={arrImages}
+          currentIndex={currentIndex}
+          closeModal={closeModal}
+          nextImage={nextImage}
+          prevImage={prevImage}
+        />
+      )}
     </div>
   );
 }

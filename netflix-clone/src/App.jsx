@@ -32,6 +32,7 @@ function App() {
     getMovies(url);
   };
 
+
   const handleGenreClick = (genreId) => {
     const updatedGenres = selectedGenres.includes(genreId)
       ? selectedGenres.filter(id => id !== genreId)
