@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FcNext } from "react-icons/fc";
+import { FaAngleRight } from "react-icons/fa6";
 import "./App.css";
 import Modal from "./Modal";
 
@@ -162,7 +162,7 @@ function App() {
   return (
     <div className="container">
       <div className="xzoom-thumbs">
-        <FcNext
+        <FaAngleRight
           onClick={handlePrev}
           className="prev-button"
           disabled={startIndex === 0}
@@ -173,7 +173,7 @@ function App() {
             <img src={image.src} alt={image.alt} className={image.className} />
           </a>
         ))}
-        <FcNext
+        <FaAngleRight
           onClick={handleNext}
           className="nxt-button"
           disabled={startIndex + 5 >= arrImages.length}
@@ -193,6 +193,8 @@ function App() {
       </div>
       <div className="description">
         <h1>React image magnifier x slider</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe facere voluptates blanditiis mollitia temporibus labore earum non ipsam, maxime nisi! A nostrum ea nisi veniam expedita quia? Temporibus assumenda aut voluptate aliquam atque quam et ad tenetur! Odit autem labore laborum dolor. Corrupti velit earum quasi sit, impedit explicabo saepe, aut labore magnam possimus asperiores eaque sed voluptates eius cum doloribus! Commodi praesentium temporibus explicabo beatae fuga aspernatur quibusdam, repellat aliquid distinctio. Voluptatibus laboriosam vel eius, quibusdam debitis modi praesentium officiis ducimus odio possimus omnis veniam nisi corporis quos sapiente deleniti maiores obcaecati dolore itaque quia eveniet exercitationem corrupti? Provident.</p>
+     
         <div className="magnified-img" ref={magnified_img_ref} />
       </div>
       {isModalOpen && (

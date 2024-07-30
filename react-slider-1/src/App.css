@@ -1,105 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  @apply m-0 p-0 box-border;
 }
 
 body {
-  background-color: #e2e2e2;
+  @apply bg-[#e2e2e2] ;
 }
 
 .container {
-  width: 940px;
-  margin: 50px auto 0;
-  background-color: #ffffff;
-  padding: 15px;
-  border-radius: 5px;
-  display: grid;
-  grid-template-columns: 1fr 4fr 7fr;
-  align-items: center;
+@apply p-5 bg-white rounded-md h-screen flex justify-center items-center;
 }
 
 .xzoom-thumbs {
-  display: flex;
-  flex-direction: column;
-  max-height: 650px;
-  min-height: 650px;
-  gap: 4px;
-  overflow-y: auto;
-  min-width: 100px;
-  position: relative;
-  justify-content: space-between;
-  align-items: center;
+  @apply flex justify-between flex-1 flex-col max-h-[700px] min-h-[650] gap-5 overflow-y-auto min-w-[100px] relative items-center;
 }
 
 .xzoom-thumbs::-webkit-scrollbar {
-  display: none;
+  @apply hidden
 }
 
 .selectedTrue {
-  border: 2px rgb(66, 66, 255) solid;
+  @apply border-2 border-[#4242ff] border-solid;
 }
 
 .xzoom-thumbs a img {
-  display: inline-block;
-  height: 100px;
-  width: 80px;
+  @apply inline-block h-[100px] w-[80px];
 }
 
 .prev-button {
-  border: 2px solid #2196F3;
-  rotate: -90deg;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 2rem;
+  @apply border-2 border-[#2196f3] border-solid  -rotate-90 cursor-pointer rounded-full text-[2rem] ;
 }
 .nxt-button {
-  border: 2px solid #2196F3;
-  rotate: 90deg;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 2rem;
+  @apply border-2 border-[#2196f3] border-solid   rotate-90 cursor-pointer rounded-full text-[2rem];
 }
 
-.prev-button[disabled], .nxt-button[disabled] {
-  cursor: not-allowed;
-  opacity: 0.5;
-  border-color: #ddd;
+.prev-button[disabled],
+.nxt-button[disabled] {
+  @apply opacity-50 cursor-not-allowed border-[#ddd];
 }
 
 .nav-button:hover {
-  background-color: #ccc;
+  @apply bg-[#ccc];
 }
 
-
 .lens {
-  position: absolute;
-  width: 10rem;
-  height: 15rem;
-  background-color: rgba(250, 235, 215, 0.301);
-  opacity: 0;
-  pointer-events: none;
+@apply absolute w-[10rem] h-[15rem]  bg-[#faebd74d] opacity-0 pointer-events-none;
 }
 
 .lens.active {
-  opacity: 1;
+  @apply opacity-100 pointer-events-auto;
 }
 
 .description {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  @apply relative flex justify-center items-center flex-col h-full w-full ;
+  flex: 7;
 }
 
 .magnified-img {
   position: absolute;
   opacity: 0;
-  height: 100%;
-  width: 100%;
-  transition: opacity 0.5s, transform 0.5s;
+  transform: scale(0.2);
+  height: 45rem;
+  width: 30rem;
+  transition: opacity 0.5s, transform 0.2s;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   pointer-events: none;
 }
@@ -110,7 +76,20 @@ body {
 }
 
 .xzoom-container {
+  flex: 4;
+  border: 2px solid #ccc;
+  border-radius: 2rem 2rem 0 2rem;
+  margin: auto 3rem;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.xzoom-container img {
+  width: 100%;
+  height: 100%;
 }
 
 img {
@@ -121,4 +100,61 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding: 40px 20px;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.close {
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+}
+
+.prev,
+.next {
+  font-size: 3rem;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 3rem;
+  width: 200px;
 }

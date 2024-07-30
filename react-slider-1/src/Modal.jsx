@@ -1,14 +1,25 @@
-import React from 'react';
-import './Modal.css';
+import React from "react";
+import "./App.css";
+import { FaAngleRight,FaAngleLeft,FaXmark } from "react-icons/fa6";
+
 
 function Modal({ images, currentIndex, closeModal, nextImage, prevImage }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <span className="close" onClick={closeModal}>&times;</span>
-        <button className="prev" onClick={prevImage}>&#10094;</button>
-        <img src={images[currentIndex].href} alt="carousel" className="carousel-image" />
-        <button className="next" onClick={nextImage}>&#10095;</button>
+        <img
+          src={images[currentIndex].href}
+          alt="carousel"
+          className="carousel-image"
+        />
+      <div className="buttons">
+        <FaAngleLeft className="prev" onClick={prevImage} />
+      
+        <FaXmark className="close" onClick={closeModal} />
+         
+        <FaAngleRight className="next" onClick={nextImage}/>
+       
+      </div>
       </div>
     </div>
   );
