@@ -32,21 +32,39 @@ function App() {
   const arrImages = [
     {
       alt: "img",
+      src: "https://heegasports.com/wp-content/uploads/2023/08/1-2.jpg-scaled.webp",
+      className: "xzoom-gallery",
+      href: "https://heegasports.com/wp-content/uploads/2023/08/1-2.jpg-scaled.webp",
+    },
+    {
+      alt: "img",
+      src: "https://heegasports.com/wp-content/uploads/2023/08/Toe-spine.jpg-scaled.webp",
+      className: "xzoom-gallery",
+      href: "https://heegasports.com/wp-content/uploads/2023/08/Toe-spine.jpg-scaled.webp",
+    },
+    {
+      alt: "img",
+      src: "https://heegasports.com/wp-content/uploads/2023/08/Qality.jpg-scaled.webp",
+      className: "xzoom-gallery",
+      href: "https://heegasports.com/wp-content/uploads/2023/08/Qality.jpg-scaled.webp",
+    },
+    {
+      alt: "img",
+      src: "https://heegasports.com/wp-content/uploads/2023/08/Hitting-Area.jpg-scaled.webp",
+      className: "xzoom-gallery",
+      href: "https://heegasports.com/wp-content/uploads/2023/08/Hitting-Area.jpg-scaled.webp",
+    },
+    {
+      alt: "img",
+      src: "https://heegasports.com/wp-content/uploads/2023/08/Handel-grip.jpg-scaled.webp",
+      className: "xzoom-gallery",
+      href: "https://heegasports.com/wp-content/uploads/2023/08/Handel-grip.jpg-scaled.webp",
+    },
+    {
+      alt: "img",
       src: "./images/img1-min.webp",
       className: "xzoom-gallery",
       href: "./images/img1.webp",
-    },
-    {
-      alt: "img",
-      src: "./images/img2-min.webp",
-      className: "xzoom-gallery",
-      href: "./images/img2.webp",
-    },
-    {
-      alt: "img",
-      src: "./images/img3-min.webp",
-      className: "xzoom-gallery",
-      href: "./images/img3.webp",
     },
     {
       alt: "img",
@@ -54,25 +72,8 @@ function App() {
       className: "xzoom-gallery",
       href: "./images/img4.webp",
     },
-    {
-      alt: "img",
-      src: "./images/img5-min.webp",
-      className: "xzoom-gallery",
-      href: "./images/img5.webp",
-    },
-    {
-      alt: "img",
-      src: "./images/img1-min.webp",
-      className: "xzoom-gallery",
-      href: "./images/img1.webp",
-    },
-    {
-      alt: "img",
-      src: "./images/img1-min.webp",
-      className: "xzoom-gallery",
-      href: "./images/img1.webp",
-    },
   ];
+  console.log(arrImages)
 
   useEffect(() => {
     const lens = lens_ref.current;
@@ -165,34 +166,41 @@ function App() {
     <div className="container">
       <div className="xzoom-thumbs">
         {displayedImages.map((image, index) => (
-          <a href='#!' prop={image.href} key={index} onClick={() => openModal(0)}>
+          <a
+            href="#!"
+            prop={image.href}
+            key={index}
+            onClick={() => openModal(0)}
+          >
             <img src={image.href} alt={image.alt} className={image.className} />
           </a>
         ))}
 
- <div id="thumbButtons">
- <FaAngleRight
-          onClick={handlePrev}
-          className="prev-button"
-          disabled={startIndex === 0}
-        />
+        <div id="thumbButtons">
+          <FaAngleRight
+            onClick={handlePrev}
+            className="prev-button"
+            disabled={startIndex === 0}
+          />
 
-        <FaAngleRight
-          onClick={handleNext}
-          className="nxt-button"
-          disabled={startIndex + 5 >= arrImages.length}
-        />
- </div>
+          <FaAngleRight
+            onClick={handleNext}
+            className="nxt-button"
+            disabled={startIndex + 5 >= arrImages.length}
+          />
+        </div>
       </div>
       <div className="xzoom-container">
         <a href="#!" className="mainImage" onClick={() => openModal(0)}>
-          <img
+          {
+            arrImages &&      <img
             alt="img"
             ref={product_img_ref}
-            src="./images/img1.webp"
+            src={arrImages[0].src}
             className="xzoom"
             xoriginal="./images/img1-min.webp"
           />
+          }
         </a>
         <div className="lens" ref={lens_ref} />
       </div>
