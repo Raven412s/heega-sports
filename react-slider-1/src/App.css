@@ -51,11 +51,7 @@ body {
 }
 
 .lens.active {
-<<<<<<< HEAD
   @apply opacity-100;
-=======
-  @apply opacity-100 ;
->>>>>>> origin/B-Yuva
 }
 
 .description {
