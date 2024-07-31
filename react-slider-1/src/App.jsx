@@ -165,24 +165,29 @@ function App() {
     <div className="container">
       <div className="xzoom-thumbs">
         {displayedImages.map((image, index) => (
-          <a href='#!' prop={image.href} key={index} onClick={() => openModal(0)}>
+          <a
+            href="#!"
+            prop={image.href}
+            key={index}
+            onClick={() => openModal(0)}
+          >
             <img src={image.href} alt={image.alt} className={image.className} />
           </a>
         ))}
 
- <div id="thumbButtons">
- <FaAngleRight
-          onClick={handlePrev}
-          className="prev-button"
-          disabled={startIndex === 0}
-        />
+        <div id="thumbButtons">
+          <FaAngleRight
+            onClick={handlePrev}
+            className="prev-button"
+            disabled={startIndex === 0}
+          />
 
-        <FaAngleRight
-          onClick={handleNext}
-          className="nxt-button"
-          disabled={startIndex + 5 >= arrImages.length}
-        />
- </div>
+          <FaAngleRight
+            onClick={handleNext}
+            className="nxt-button"
+            disabled={startIndex + 5 >= arrImages.length}
+          />
+        </div>
       </div>
       <div className="xzoom-container">
         <a href="#!" className="mainImage" onClick={() => openModal(0)}>
