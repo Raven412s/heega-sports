@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-@apply p-5 bg-white rounded-md h-screen flex justify-center items-center;
+  @apply p-5 bg-white rounded-md h-screen flex justify-center items-center;
 }
 
 .xzoom-thumbs {
@@ -47,11 +47,15 @@ body {
 }
 
 .lens {
-@apply absolute w-[10rem] h-[15rem]  bg-[#faebd74d] opacity-0 pointer-events-none;
+  @apply absolute w-[10rem] h-[15rem]  bg-[#faebd74d] opacity-0 pointer-events-none;
 }
 
 .lens.active {
+<<<<<<< HEAD
   @apply opacity-100;
+=======
+  @apply opacity-100 ;
+>>>>>>> origin/B-Yuva
 }
 
 .description {
@@ -60,103 +64,59 @@ body {
 }
 
 .magnified-img {
-  position: absolute;
-  opacity: 0;
-  transform: scale(0.2);
-  height: 45rem;
-  width: 30rem;
+  @apply  absolute opacity-0 scale-[0.2] h-[45rem] w-[30rem] pointer-events-none ;
   transition: opacity 0.5s, transform 0.2s;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  pointer-events: none;
+  box-shadow: #64646f33 0px 7px 29px 0px;
 }
 
 .magnified-img.active {
-  opacity: 1;
-  transform: scale(1);
+  @apply opacity-100 scale-100;
 }
 
 .xzoom-container {
+  @apply border-2 border-[#ccc] border-solid rounded rounded-t-3xl rounded-r-3xl rounded-b-none rounded-l-3xl my-auto mx-12 relative flex justify-center items-center overflow-hidden;
   flex: 4;
-  border: 2px solid #ccc;
-  border-radius: 2rem 2rem 0 2rem;
-  margin: auto 3rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
 .xzoom-container img {
-  width: 100%;
-  height: 100%;
+  @apply w-full h-full;
 }
 
 img {
-  width: 400px;
+  @apply w-[400px];
 }
 
 .xzoom-thumbs a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply flex justify-center items-center;
+  
 }
 
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  @apply fixed top-0 left-0 w-full h-full bg-[#000000b3]  flex justify-center items-center z-50; 
 }
 
 .modal-content {
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  padding: 40px 20px;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  @apply w-full h-full bg-[#fff] py-10 px-5 rounded-2xl flex flex-col justify-between items-center;
 }
 
 .carousel-image {
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
+  @apply max-w-full max-h-[80vh] object-contain;
 }
 
 .close {
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #000;
+  @apply text-3xl font-bold cursor-pointer text-black;
 }
 
 .prev,
 .next {
-  font-size: 3rem;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.7);
-  border: none;
-  padding: 10px;
-  cursor: pointer;
+  @apply text-5xl font-bold bg-[#ffffffb3] border-none p-3 cursor-pointer;
 }
 
 .buttons {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  bottom: 3rem;
-  width: 200px;
+  @apply absolute flex justify-between items-center bottom-12 w-[200px];
+}
+#thumbButtons{
+  @apply  flex justify-evenly items-center w-full mt-10; 
 }
 
 #thumbButtons{
