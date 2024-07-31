@@ -51,7 +51,7 @@ body {
 }
 
 .lens.active {
-  @apply opacity-100 pointer-events-auto;
+  @apply opacity-100;
 }
 
 .description {
@@ -157,4 +157,9 @@ img {
   align-items: center;
   bottom: 3rem;
   width: 200px;
+}
+
+#thumbButtons{
+  display: flex;
+  width: 100%;justify-content: space-evenly;align-items: center;margin-top: 40px;
 }

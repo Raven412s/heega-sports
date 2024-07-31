@@ -25,7 +25,9 @@ function App() {
   };
 
   const prevImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + arrImages.length) % arrImages.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + arrImages.length) % arrImages.length
+    );
   };
   const arrImages = [
     {
@@ -122,7 +124,7 @@ function App() {
     thumbnails.forEach((thumbnail) => {
       thumbnail.addEventListener("mouseover", (e) => {
         e.preventDefault();
-        const newSrc = thumbnail.getAttribute("href");
+        const newSrc = thumbnail.getAttribute("prop");
         const newPreview = thumbnail.querySelector("img").getAttribute("src");
         product_img.setAttribute("src", newSrc);
         product_img.setAttribute("xoriginal", newPreview);
@@ -162,22 +164,25 @@ function App() {
   return (
     <div className="container">
       <div className="xzoom-thumbs">
-        <FaAngleRight
+        {displayedImages.map((image, index) => (
+          <a href='#!' prop={image.href} key={index} onClick={() => openModal(0)}>
+            <img src={image.href} alt={image.alt} className={image.className} />
+          </a>
+        ))}
+
+ <div id="thumbButtons">
+ <FaAngleRight
           onClick={handlePrev}
           className="prev-button"
           disabled={startIndex === 0}
         />
 
-        {displayedImages.map((image, index) => (
-          <a href={image.href} key={index}>
-            <img src={image.src} alt={image.alt} className={image.className} />
-          </a>
-        ))}
         <FaAngleRight
           onClick={handleNext}
           className="nxt-button"
           disabled={startIndex + 5 >= arrImages.length}
         />
+ </div>
       </div>
       <div className="xzoom-container">
         <a href="#!" className="mainImage" onClick={() => openModal(0)}>
@@ -193,8 +198,21 @@ function App() {
       </div>
       <div className="description">
         <h1>React image magnifier x slider</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe facere voluptates blanditiis mollitia temporibus labore earum non ipsam, maxime nisi! A nostrum ea nisi veniam expedita quia? Temporibus assumenda aut voluptate aliquam atque quam et ad tenetur! Odit autem labore laborum dolor. Corrupti velit earum quasi sit, impedit explicabo saepe, aut labore magnam possimus asperiores eaque sed voluptates eius cum doloribus! Commodi praesentium temporibus explicabo beatae fuga aspernatur quibusdam, repellat aliquid distinctio. Voluptatibus laboriosam vel eius, quibusdam debitis modi praesentium officiis ducimus odio possimus omnis veniam nisi corporis quos sapiente deleniti maiores obcaecati dolore itaque quia eveniet exercitationem corrupti? Provident.</p>
-     
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe facere
+          voluptates blanditiis mollitia temporibus labore earum non ipsam,
+          maxime nisi! A nostrum ea nisi veniam expedita quia? Temporibus
+          assumenda aut voluptate aliquam atque quam et ad tenetur! Odit autem
+          labore laborum dolor. Corrupti velit earum quasi sit, impedit
+          explicabo saepe, aut labore magnam possimus asperiores eaque sed
+          voluptates eius cum doloribus! Commodi praesentium temporibus
+          explicabo beatae fuga aspernatur quibusdam, repellat aliquid
+          distinctio. Voluptatibus laboriosam vel eius, quibusdam debitis modi
+          praesentium officiis ducimus odio possimus omnis veniam nisi corporis
+          quos sapiente deleniti maiores obcaecati dolore itaque quia eveniet
+          exercitationem corrupti? Provident.
+        </p>
+
         <div className="magnified-img" ref={magnified_img_ref} />
       </div>
       {isModalOpen && (
