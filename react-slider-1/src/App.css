@@ -27,7 +27,11 @@ body {
 }
 
 .xzoom-thumbs a img {
+<<<<<<< HEAD
   @apply inline-block h-20 w-20;
+=======
+  @apply inline-block h-[6rem] w-[6rem];
+>>>>>>> origin/B-Yuva
 }
 
 .prev-button {
@@ -47,7 +51,11 @@ body {
 }
 
 .lens {
+<<<<<<< HEAD
   @apply absolute w-[10rem] h-[10rem]  bg-[#faebd74d] opacity-0 pointer-events-none rounded-full;
+=======
+  @apply absolute w-[10rem] h-[10rem]  bg-[#faebd74d] opacity-0 pointer-events-none;
+>>>>>>> origin/B-Yuva
 }
 
 .lens.active {
@@ -60,7 +68,11 @@ body {
 }
 
 .magnified-img {
+<<<<<<< HEAD
   @apply  absolute opacity-0 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none rounded-full ;
+=======
+  @apply  absolute opacity-0 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none ;
+>>>>>>> origin/B-Yuva
   transition: opacity 0.5s, transform 0.2s;
   box-shadow: #64646f33 0px 7px 29px 0px;
 }
