@@ -7,7 +7,7 @@
 }
 
 body {
-  @apply bg-[#e2e2e2] ;
+  @apply bg-[#e2e2e2];
 }
 
 .container {
@@ -19,7 +19,7 @@ body {
 }
 
 .xzoom-thumbs::-webkit-scrollbar {
-  @apply hidden
+  @apply hidden;
 }
 
 .selectedTrue {
@@ -27,15 +27,11 @@ body {
 }
 
 .xzoom-thumbs a img {
-<<<<<<< HEAD
   @apply inline-block h-20 w-20;
-=======
-  @apply inline-block h-[6rem] w-[6rem];
->>>>>>> origin/B-Yuva
 }
 
 .prev-button {
-  @apply border-2 border-[#2196f3] border-solid  -rotate-90 cursor-pointer rounded-full text-[2rem] ;
+  @apply border-2 border-[#2196f3] border-solid  -rotate-90 cursor-pointer rounded-full text-[2rem];
 }
 .nxt-button {
   @apply border-2 border-[#2196f3] border-solid   rotate-90 cursor-pointer rounded-full text-[2rem];
@@ -51,11 +47,7 @@ body {
 }
 
 .lens {
-<<<<<<< HEAD
   @apply absolute w-[10rem] h-[10rem]  bg-[#faebd74d] opacity-0 pointer-events-none rounded-full;
-=======
-  @apply absolute w-[10rem] h-[10rem]  bg-[#faebd74d] opacity-0 pointer-events-none;
->>>>>>> origin/B-Yuva
 }
 
 .lens.active {
@@ -63,18 +55,12 @@ body {
 }
 
 .description {
-  @apply relative flex justify-center items-start flex-col h-full w-full ;
+  @apply relative flex justify-center items-start flex-col h-full w-full;
   flex: 7;
 }
 
 .magnified-img {
-<<<<<<< HEAD
-  @apply  absolute opacity-0 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none rounded-full ;
-=======
-  @apply  absolute opacity-0 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none ;
->>>>>>> origin/B-Yuva
-  transition: opacity 0.5s, transform 0.2s;
-  box-shadow: #64646f33 0px 7px 29px 0px;
+  @apply absolute opacity-0 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none rounded-full;
 }
 
 .magnified-img.active {
@@ -96,11 +82,10 @@ img {
 
 .xzoom-thumbs a {
   @apply flex justify-center items-center;
-  
 }
 
 .modal-overlay {
-  @apply fixed top-0 left-0 w-full h-full bg-[#000000b3]  flex justify-center items-center z-50; 
+  @apply fixed top-0 left-0 w-full h-full bg-[#000000b3]  flex justify-center items-center z-50;
 }
 
 .modal-content {
@@ -123,6 +108,6 @@ img {
 .buttons {
   @apply absolute flex justify-between items-center bottom-12 w-[200px];
 }
-#thumbButtons{
-  @apply  flex justify-evenly items-center w-full mt-10; 
+#thumbButtons {
+  @apply flex justify-evenly items-center w-full mt-10;
 }
