@@ -51,7 +51,7 @@ body {
 }
 
 .lens.active {
-  @apply opacity-100 ;
+  @apply opacity-100;
 }
 
 .description {
