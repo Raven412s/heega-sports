@@ -111,3 +111,6 @@ img {
 .close {
   @apply text-black text-4xl cursor-pointer;
 }
+#mainImage{
+@apply h-[30rem] w-[30rem];
+}
