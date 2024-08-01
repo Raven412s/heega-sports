@@ -62,7 +62,7 @@ body {
 }
 
 .magnified-img {
-  @apply opacity-0 bg-red-100 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none absolute z-[99];
+  @apply opacity-0 bg-red-100 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none absolute ;
 }
 
 .magnified-img.active {
@@ -72,10 +72,6 @@ body {
 .xzoom-container {
   @apply border-2 border-[#ccc] border-solid rounded rounded-t-3xl rounded-r-3xl rounded-b-none rounded-l-3xl my-auto mx-12 relative flex justify-center items-center overflow-hidden;
   flex: 4;
-}
-
-.xzoom-container .magnified-img{
-
 }
 
 .xzoom-container img {
@@ -144,6 +140,7 @@ img {
   flex-direction: column;
   justify-content: space-evenly;
   gap: 4rem;
+  z-index: 89;
 }
 
 .modal-content {
@@ -165,8 +162,7 @@ img {
 .buttons {
   position: absolute;
 width: 200px;
-bottom: 2rem
-;
+bottom: 2rem;
   display: flex;
   justify-content: space-between;
 

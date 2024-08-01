@@ -4,7 +4,6 @@ import "./App.css";
 import SpecialImage from "./Custom/SpecialImage";
 import Modal from "./Components/Modal";
 
-
 interface Image {
   alt: string;
   src: string;
@@ -64,6 +63,7 @@ const App: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0); // New state for selected thumbnail
 
   const openModal = (index: number) => {
     setCurrentIndex(index);
@@ -81,48 +81,49 @@ const App: React.FC = () => {
   const prevImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + arrImages.length) % arrImages.length);
   };
+
   useEffect(() => {
     const lens = lens_ref.current;
     const product_img = product_img_ref.current;
     const magnified_img = magnified_img_ref.current;
     const thumbnails = document.querySelectorAll(".xzoom-thumbs a");
-  
+
     const moveLens = (e: MouseEvent) => {
       if (!lens || !product_img || !magnified_img) return;
       let x, y, cx, cy;
       const product_img_rect = product_img.getBoundingClientRect();
       x = e.pageX - product_img_rect.left - lens.offsetWidth / 2;
       y = e.pageY - product_img_rect.top - lens.offsetHeight / 2;
-  
+
       let max_xpos = product_img_rect.width - lens.offsetWidth;
       let max_ypos = product_img_rect.height - lens.offsetHeight;
       if (x > max_xpos) x = max_xpos;
       if (x < 0) x = 0;
       if (y > max_ypos) y = max_ypos;
       if (y < 0) y = 0;
-  
+
       lens.style.cssText = `top: ${y}px; left:${x}px;`;
-  
-      cx = magnified_img.offsetWidth / (lens.offsetWidth || 1); // Handle possible null
-      cy = magnified_img.offsetHeight / (lens.offsetHeight || 1); // Handle possible null
-  
+
+      cx = magnified_img.offsetWidth / (lens.offsetWidth || 1);
+      cy = magnified_img.offsetHeight / (lens.offsetHeight || 1);
+
       magnified_img.style.cssText = `background: url('${product_img.src}') -${
         x * cx
       }px -${y * cy}px / ${product_img_rect.width * cx}px ${
         product_img_rect.height * cy
       }px no-repeat`;
-  
+
       lens.classList.add("active");
       magnified_img.classList.add("active");
     };
-  
+
     const leaveLens = () => {
       if (lens && magnified_img) {
         lens.classList.remove("active");
         magnified_img.classList.remove("active");
       }
     };
-  
+
     const magnify = () => {
       if (lens && product_img) {
         lens.addEventListener("mousemove", moveLens);
@@ -130,35 +131,36 @@ const App: React.FC = () => {
         product_img.addEventListener("mouseout", leaveLens);
       }
     };
-  
+
     magnify();
-  
+
     thumbnails.forEach((thumbnail) => {
       thumbnail.addEventListener("click", (e) => {
         e.preventDefault();
         if (!product_img || !magnified_img) return;
-        
+
         const newSrc = thumbnail.getAttribute("href");
         const newPreview = thumbnail.querySelector("img")?.getAttribute("src");
-        
+
         if (newSrc) {
           product_img.setAttribute("src", newSrc);
           product_img.setAttribute("xoriginal", newPreview ?? "");
         }
-        
-        thumbnails.forEach((thumbs) => thumbs.classList.remove("selectedTrue"));
-        thumbnail.classList.add("selectedTrue");
-        
+
+        // Update selectedIndex based on clicked thumbnail
+        const index = Array.from(thumbnails).indexOf(thumbnail);
+        setSelectedIndex(index);
+
         const product_img_rect = product_img.getBoundingClientRect();
-        const cx = magnified_img.offsetWidth / (lens?.offsetWidth || 1); // Handle possible null
-        const cy = magnified_img.offsetHeight / (lens?.offsetHeight || 1); // Handle possible null
-        
+        const cx = magnified_img.offsetWidth / (lens?.offsetWidth || 1);
+        const cy = magnified_img.offsetHeight / (lens?.offsetHeight || 1);
+
         magnified_img.style.cssText = `background: url('${newSrc}') -${0}px -${0}px / ${
           product_img_rect.width * cx
         }px ${product_img_rect.height * cy}px no-repeat`;
       });
     });
-  
+
     return () => {
       if (lens && product_img) {
         lens.removeEventListener("mousemove", moveLens);
@@ -166,26 +168,16 @@ const App: React.FC = () => {
         product_img.removeEventListener("mouseout", leaveLens);
       }
     };
-  }, []);
-  
-
-  const removeSelectedClass = () => {
-    const thumbnails = document.querySelectorAll(".xzoom-thumbs a");
-    thumbnails.forEach((thumbnail) => {
-      thumbnail.classList.remove("selectedTrue");
-    });
-  };
+  }, [selectedIndex]);
 
   const handleNext = () => {
     if (startIndex + 5 < arrImages.length) {
       setStartIndex((prevIndex) => prevIndex + 1);
-      removeSelectedClass();
     }
   };
 
   const handlePrev = () => {
     setStartIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1));
-    removeSelectedClass();
   };
 
   const displayedImages = arrImages.slice(startIndex, startIndex + 5);
@@ -194,7 +186,15 @@ const App: React.FC = () => {
     <div className="container">
       <div className="xzoom-thumbs">
         {displayedImages.map((image, index) => (
-          <a href={image.href} key={index}>
+          <a
+            href={image.href}
+            key={index}
+            className={selectedIndex === startIndex + index ? "selectedTrue" : ""}
+            onClick={(e) => {
+              e.preventDefault();
+              setSelectedIndex(startIndex + index);
+            }}
+          >
             <SpecialImage src={image.href} alt={image.alt} className={image.className} />
           </a>
         ))}
@@ -217,7 +217,7 @@ const App: React.FC = () => {
             <SpecialImage
               alt="img"
               ref={product_img_ref}
-              src={arrImages[0].src}
+              src={arrImages[selectedIndex].src} // Update this to the selected image
               className="xzoom"
               xoriginal="./images/img1-min.webp"
             />
