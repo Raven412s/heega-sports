@@ -11,7 +11,6 @@ interface Image {
   className: string;
   href: string;
 }
-
 const arrImages: Image[] = [
   {
     alt: "img",
