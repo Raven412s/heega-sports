@@ -62,7 +62,7 @@ body {
 }
 
 .magnified-img {
-  @apply opacity-0 bg-red-100 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none absolute;
+  @apply opacity-0 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none absolute ;
 }
 
 .magnified-img.active {
@@ -75,12 +75,9 @@ body {
 }
 
 .xzoom-container img {
-  @apply w-full h-full;
+  @apply w-full h-full object-contain;
 }
 
-img {
-  @apply w-[400px];
-}
 
 .xzoom-thumbs a {
   @apply flex justify-center items-center;
@@ -112,5 +109,5 @@ img {
   @apply text-black text-4xl cursor-pointer;
 }
 #mainImage{
-@apply h-[30rem] w-[30rem];
+@apply h-[30rem] w-[30rem] flex justify-center items-center;
 }
