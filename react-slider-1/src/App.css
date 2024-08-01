@@ -40,7 +40,7 @@ body {
   @apply border-2 border-[#2196f3] border-solid   rotate-90 cursor-pointer rounded-full text-[2rem];
 }
 
-.disabled{
+.disabled {
   @apply opacity-50 cursor-not-allowed border-[#ddd];
 }
 
@@ -62,7 +62,7 @@ body {
 }
 
 .magnified-img {
-  @apply opacity-0 bg-red-100 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none absolute z-[99];
+  @apply opacity-0 bg-red-100 scale-[0.2] h-[30rem] w-[30rem] pointer-events-none absolute;
 }
 
 .magnified-img.active {
@@ -72,10 +72,6 @@ body {
 .xzoom-container {
   @apply border-2 border-[#ccc] border-solid rounded rounded-t-3xl rounded-r-3xl rounded-b-none rounded-l-3xl my-auto mx-12 relative flex justify-center items-center overflow-hidden;
   flex: 4;
-}
-
-.xzoom-container .magnified-img{
-
 }
 
 .xzoom-container img {
@@ -91,10 +87,11 @@ img {
 }
 
 .modal-overlay {
-  @apply fixed top-0 left-0 w-full h-full bg-[#ffffff] flex items-center flex-col justify-evenly gap-16};
+  @apply fixed top-0 left-0 w-full h-full bg-[#ffffff] flex items-center flex-col justify-evenly gap-16;
+}
 
 .modal-content {
-@apply relative;
+  @apply relative;
 }
 
 .carousel-image {
@@ -109,6 +106,8 @@ img {
   @apply absolute w-[200px] bottom-8 flex justify-between;
 }
 
-.prev, .next, .close {
+.prev,
+.next,
+.close {
   @apply text-black text-4xl cursor-pointer;
 }
